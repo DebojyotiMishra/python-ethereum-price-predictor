@@ -14,3 +14,7 @@ Before running the script, make sure you have the following libraries installed:
 You can install these libraries using pip:
 
 ```shell
+pip install pandas
+pip install yfinance
+pip install plotly
+pip install prophet
