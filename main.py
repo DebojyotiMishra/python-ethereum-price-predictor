@@ -64,3 +64,24 @@ fig.update_layout(
         type="date",
     )
 )
+
+# ================================ Prophet Model ================================
+m = Prophet(
+    seasonality_mode="multiplicative" 
+)
+
+m.fit(df)
+
+future = m.make_future_dataframe(periods = 365)
+future.tail()
+
+forecast = m.predict(future)
+forecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].tail()
+
+# Price preditction for the next day
+next_day = (datetime.today() + timedelta(days=1)).strftime('%Y-%m-%d')
+forecast[forecast['ds'] == next_day]['yhat'].item()
+
+plot_plotly(m, forecast)
+plot_components_plotly(m, forecast)
+
