@@ -7,6 +7,7 @@ import plotly.graph_objects as go
 from prophet import Prophet
 from prophet.plot import plot_plotly, plot_components_plotly
 import warnings
+import os
 
 # Ignoring warnings
 warnings.filterwarnings('ignore')
@@ -115,3 +116,9 @@ plot_plotly(m, forecast)
 
 # Plotting the components of the forecasted values
 plot_components_plotly(m, forecast)
+
+# Getting the directory of the main.py file
+directory = os.path.dirname(os.path.abspath(__file__))
+
+# Saving the forecasted values to a CSV file in the same directory as main.py
+forecast.to_csv(os.path.join(directory, 'forecast.csv'), index=False)
